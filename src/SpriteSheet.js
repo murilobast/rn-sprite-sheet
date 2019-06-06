@@ -15,13 +15,15 @@ export default class SpriteSheet extends React.PureComponent {
     imageStyle: stylePropType, // styles for the sprite sheet
     height: PropTypes.number, // set either height, width, or neither
     width: PropTypes.number, // do not set both height and width
+    useNativeDriver: PropTypes.bool, // set useNative driver value (defaults to true)
     onLoad: PropTypes.func
   };
 
   static defaultPropTypes = {
     columns: 1,
     rows: 1,
-    animations: {}
+    animations: {},
+    useNativeDriver: true
   };
 
   constructor(props) {
@@ -155,7 +157,7 @@ export default class SpriteSheet extends React.PureComponent {
   };
 
   play = ({ type, fps = 24, loop = false, resetAfterFinish = false, onFinish = () => { } }) => {
-    let { animations } = this.props;
+    let { animations, useNativeDriver } = this.props;
     let { length } = animations[type];
 
     this.setState({ animationType: type }, () => {
@@ -163,7 +165,7 @@ export default class SpriteSheet extends React.PureComponent {
         toValue: length,
         duration: (length / fps) * 1000,
         easing: Easing.linear,
-        useNativeDriver: true // Using native animation driver instead of JS
+        useNativeDriver
       });
 
       this.time.setValue(0);

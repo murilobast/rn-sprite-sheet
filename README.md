@@ -61,6 +61,7 @@ stop(callback)
 
 ```javascript
 static propTypes = {
+  useNativeDriver: PropTypes.bool, // set useNative driver value (defaults to true)
   source: PropTypes.number.isRequired, // source must be required; { uri } will not work
   columns: PropTypes.number.isRequired,
   rows: PropTypes.number.isRequired,
